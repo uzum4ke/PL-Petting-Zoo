@@ -1,1 +1,0 @@
-Due to my love of type theory and category theory and largely being inspire by Andrej Bauer's Programming language Zoo I have decided to take up caretaking. Here at my Programming Language Petting Zoo I hope to host a wide collection of both familiar and exotic beasts that can be found across the lands.           

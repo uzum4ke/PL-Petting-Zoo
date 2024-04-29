@@ -4,6 +4,7 @@ import Text.Parsec.Language (emptyDef)
 import qualified Text.Parsec.Token as Token
 import Text.Parsec.Expr
 import Text.Parsec.Prim (parse)
+import System.IO (hFlush, stdout)
 
 -- The arithmetic expression ADT
 data Expr
@@ -40,11 +41,11 @@ expr = buildExpressionParser table term
             , [Infix (reservedOp "*" >> return Mul) AssocLeft]
             , [Infix (reservedOp "+" >> return Add) AssocLeft]
             ]
-    term = parens expr <|> (Lit <$> integer)
+    term = parens expr <|> Lit <$> integer
 
 -- Convenience function to parse a string
 parseString :: String -> Either ParseError Expr
-parseString str = parse (wholeExpr) "" str
+parseString = parse wholeExpr ""
   where
     wholeExpr = do
       whiteSpace
@@ -54,3 +55,23 @@ parseString str = parse (wholeExpr) "" str
 
 whiteSpace :: Parser ()
 whiteSpace = Token.whiteSpace lexer
+
+-- Function to evaluate the expression
+eval :: Expr -> Integer
+eval (Lit n)   = n
+eval (Add x y) = eval x + eval y
+eval (Mul x y) = eval x * eval y
+eval (Exp x y) = eval x ^ eval y
+
+
+
+main :: IO ()
+main = do
+    putStrLn "Enter an arithmetic expression:"
+    hFlush stdout  -- Make sure the prompt appears before input is entered
+    input <- getLine
+    case parseString input of
+        Left err -> print err  -- If parsing fails, print the error
+        Right expr -> do
+            let result = eval expr  -- Evaluate the expression
+            putStrLn ("The result of the expression is: " ++ show result)
