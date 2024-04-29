@@ -1,0 +1,1 @@
+Due to my love of type theory and category theory and largely inspired by Andrej Bauer et al's Programming Language Zoo (https://plzoo.andrej.com/) I decided to become a caretaker. I hope to host a vast collection fo both familiar and exotic beasts from across the land!
