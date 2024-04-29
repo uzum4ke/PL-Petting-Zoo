@@ -1,0 +1,1 @@
+A simple typed (Cartesian Closed) lambda calculus with Integers and Booleans.
