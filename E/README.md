@@ -1,0 +1,1 @@
+An implementation of the language E from Chapter 4: Statics of R. Harpers 'Practical Foundations for Programming Languages 2nd Ed.'
